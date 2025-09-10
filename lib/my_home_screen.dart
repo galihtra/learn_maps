@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -9,15 +11,15 @@ class MyHomeScreen extends StatefulWidget {
 }
 
 class _MyHomeScreenState extends State<MyHomeScreen> {
-  GoogleMapController? mapController;
+  final Completer<GoogleMapController> _controller = Completer();
 
   final CameraPosition _initialPosition = const CameraPosition(
     target: LatLng(1.18376, 104.01703),
-    zoom: 14.4746,
+    zoom: 18,
   );
 
   void _onMapCreated(GoogleMapController controller) {
-    mapController = controller;
+    _controller.complete(controller);
   }
 
   final List<Marker> myMarker = [];
@@ -27,6 +29,13 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
       position: LatLng(1.18376, 104.01703),
       infoWindow: InfoWindow(
         title: "My Position",
+      ),
+    ),
+    Marker(
+      markerId: MarkerId("Second"),
+      position: LatLng(1.1852252827119503, 104.01805192264287),
+      infoWindow: InfoWindow(
+        title: "Indomaret Tg.Sengkuang",
       ),
     )
   ];
@@ -41,12 +50,28 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: GoogleMap(
-        initialCameraPosition: _initialPosition,
-        mapType: MapType.normal,
-        markers: Set<Marker>.of(myMarker),
-        onMapCreated: _onMapCreated,
-      )),
+        child: GoogleMap(
+          initialCameraPosition: _initialPosition,
+          mapType: MapType.normal,
+          markers: Set<Marker>.of(myMarker),
+          onMapCreated: _onMapCreated,
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          GoogleMapController controller = await _controller.future;
+          controller.animateCamera(
+            CameraUpdate.newCameraPosition(
+              const CameraPosition(
+                target: LatLng(1.1852252827119503, 104.01805192264287),
+                zoom: 18,
+              ),
+            ),
+          );
+          setState(() {});
+        },
+        child: const Icon(Icons.location_searching),
+      ),
     );
   }
 }

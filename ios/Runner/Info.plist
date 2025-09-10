@@ -6,6 +6,10 @@
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
 	<string>Test App</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Lokasi Anda dibutuhkan untuk menemukan tempat-tempat terdekat di sekitar Anda.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Lokasi Anda dibutuhkan untuk memberikan notifikasi dan pembaruan relevan bahkan saat aplikasi tidak digunakan.</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
