@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:test_app/GetUserLocation/get_user_location.dart';
+import 'package:test_app/MyPolygone/my_polygone.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:  const GetUserLocation(),
+      home:  const MyPolygone(),
     );
   }
 }
